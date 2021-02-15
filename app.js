@@ -5,10 +5,22 @@ class Timer {
     this.startButton = startButton;
     this.pauseButton = pauseButton;
     this.startButton.addEventListener('click', this.start);
+    this.pauseButton.addEventListener('click', this.pause);
   }
 
   start = () => {
-    console.log('Time to start a timer', this);
+    this.tick();
+    // Use setInterval for calling tick every second
+    this.interval = setInterval(this.tick, 1000);
+  }
+
+  pause = () => {
+    clearInterval(this.interval);
+  }
+
+  tick = () => {
+    const timeRemaining = +this.durationInput.value;
+    this.durationInput.value = timeRemaining - 1;
   }
 }
 
